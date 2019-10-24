@@ -4,11 +4,23 @@ import threading
 import time
 import os
 from PIL import ImageTk, Image
+import random
 
 pygame.init()
 size = width, height = 500, 330
 window = pygame.display.set_mode(size)
 
+
+def strrandom():
+    num1 = random.randint(0, 50)
+    num2 = random.randint(0, 50)
+    p = random.uniform(0, 1)
+    if p > 0.5:
+        sum = num1 + num2
+    else:
+        sum = random.randint(50, 100)
+    str = "{}+{}={}?".format(num1, num2, sum)
+    return str
 
 def getfiles(Path):
     """获取图片文件名。"""
@@ -19,17 +31,13 @@ def getfiles(Path):
     return files
 
 
-textlist = ['1+1=2?', '2+5=7?', '3+17=20?', '55-5=60?', '54-4=60?', '1+9=10?', '2+18=30?',
-            '3+20=32?', '55-11=44?', '54-4=50?', '1+59=70?', '2+18=20?', '3+15=18?', '55+99=154?',
-            '54+16=70?', '1+56=57?', '2+56=59?', '3+57=70?', '55+33=88?', '54+16=80?', '2+5=7?', '3+17=20?', '55-5=60?',
-            '54-4=60?', '1+9=10?', '2+18=30?',
-            '3+20=32?', '55-11=44?', '54-4=50?', '1+59=70?', '2+18=20?', '3+15=18?', '55+99=154?',
-            '54+16=70?', '1+56=57?', '2+56=59?', '3+57=70?', '55+33=88?', '54+16=80?'
-            ]
+
 myfont = pygame.font.SysFont('宋体', 150)
 surface = []
-for text in textlist:
-    surface.append(myfont.render(text, False, (200, 200, 10)))
+for i in range(0,100):
+    str = strrandom()
+    surface.append(myfont.render(str, False, (200, 200, 10)))
+    print(str)
 imagebox = []
 imagebox2 = []
 Path = "D:\\Users\\chen\\Desktop\\new\\ciji\\database\\database2\\cat10"
@@ -91,6 +99,5 @@ while 1:
             break
     if res != -1:
         window.blit(imagebox[res], (0, 0))
-
     window.blit(surface[num], (40, 120))
     pygame.display.update()
