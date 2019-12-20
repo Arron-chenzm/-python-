@@ -55,14 +55,14 @@ for i in range(0, 100):
     str, res = strrandom()
     surface.append(myfont.render(str, False, (200, 200, 10)))
     result.append(res)
-print(result)
+# print(result)
 imagebox = []
 imagebox2 = []
 Path = "D:\\Users\\chen\\Desktop\\new\\ciji\\database\\database2\\cat10"
 Path2 = "D:\\Users\\chen\\Desktop\\new\\ciji\\database\\database2\\butterfly06"
 files = getfiles(Path)
 files2 = getfiles(Path2)
-num = 50  # 图片数目
+num = 51  # 图片数目
 for i in range(0, num):
     imagebox.append(pygame.image.load(Path + '\\' + files[i]))
 for i in range(0, num - 10):
@@ -83,11 +83,11 @@ while 1:
         t2 = toc(t1)
     count = count + 1
     if count == list[-1]:
-        print("{}:{}".format("回答正确率:", acc(answer, result)))
+        print("{}:{}".format("回答正确率", acc(answer, result)))
         sys.exit()
     for event in pygame.event.get():  # 获取用户当前所做动作的事件列表
         if event.type == pygame.QUIT:
-            print("{}:{}".format("回答正确率:", acc(answer, result)))
+            print("{}:{}".format("回答正确率", acc(answer, result)))
             sys.exit()
         elif event.type == KEYDOWN:
             # 检测按键是否是a或者left
@@ -103,7 +103,6 @@ while 1:
         if count == list[i]:
             window.blit(imagebox[i], (0, 0))
             res = i
-
             pygame.display.update()
             print(toc(t1))
             print(i)
