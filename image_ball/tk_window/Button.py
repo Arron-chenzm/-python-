@@ -76,3 +76,7 @@ class Button:
         if self.status == Button.DOWN:  # 如果按钮的当前状态是按下状态,才继续执行下面的代码
             self.status = Button.NORMAL  # 按钮弹起,所以还原成普通状态
             return self.text
+    def mouseUp3(self):
+        if self.status == Button.DOWN:  # 如果按钮的当前状态是按下状态,才继续执行下面的代码
+            self.status = Button.NORMAL  # 按钮弹起,所以还原成普通状态
+            return self.callBackFunc()

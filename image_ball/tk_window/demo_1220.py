@@ -155,7 +155,7 @@ def acc(a, b):
         pass
 
 
-def strrandom():
+def strrandom():#生成随机算数
     num1 = random.randint(0, 50)
     num2 = random.randint(0, 50)
     p = random.uniform(0, 1)

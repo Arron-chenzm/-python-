@@ -202,6 +202,7 @@ Path2 = "D:\\Users\\chen\\Desktop\\new\\ciji\\database\\database2\\butterfly06"
 files = getfiles(Path)
 files2 = getfiles(Path2)
 num = 3100
+
 # 图片数目
 for i in range(0, num):
     imagebox.append(pygame.image.load(Path + '\\' + files[i]))
