@@ -1,6 +1,12 @@
+import random
+list_time_res = [0] * 80
+print(list_time_res)
+print(len(list_time_res))
+fp = open("{}.txt".format("czm"), 'a')
+for i in range(0, len(list_time_res)-2):
 
-filename = "czm"
-list_time_res = [1,2,3,4,5,6]
-fp = open("{}.txt".format(filename), 'w')  # 如果有这个文件就打开，如果没有这个文件就创建一个名叫CSDN的txt文件
-fp.write(str(list_time_res))
+    fp.writelines("{}\n".format(list_time_res[i]))
+    print(i)
+    # tem = str(stimu_delaytime_list[i])
+    # fp.write(tem)
 fp.close()

@@ -10,10 +10,10 @@ from PIL import ImageTk, Image
 import random
 
 filename = "czm"
-bg_appeartime = 60  # 每一张背景图片呈现的时间
+bg_appeartime = 60  # 每一张背景图片呈现的时间,单位1000/60ms
 bg_appearnum = 10  # 每一个trail呈现的图片数目
 trail_bgtime = bg_appeartime * bg_appearnum  # 每一个trail背景图片呈现的总时间
-trail_times = 80  # 呈现trail次数
+trail_times = 2  # 呈现trail次数
 num = 0  # 储藏回答问题的总数目
 trail_num = []  # 存储每一个trail结束后，回答问题的总数目
 
@@ -29,14 +29,14 @@ btnFont = pygame.font.SysFont("lisu", 40)
 delay_time = 0  # 问卷进行的时间,单位1000/60ms
 
 
-# 产生1-6的随机数，用于控制刺激帧出现时长
+# 产生1-10的随机数，确定刺激在10张背景图中哪一张后出现
 def time_random1():
     num = random.randint(1, 10)
     return num
 
-
+# 生成0-6的随机数，前后都是闭区间
 def time_random2():
-    num = random.randint(0, 7)
+    num = random.randint(0, 6)
     return num
 
 
@@ -44,7 +44,7 @@ def toc(t1):
     t = time.time()
     return (t - t1) * 1000
 
-
+# 计算进来的两个数组，的正确率
 def acc(a, b):
     num = len(b) if len(a) > len(b) else len(a)
     sum = 0
@@ -56,7 +56,7 @@ def acc(a, b):
     except:
         pass
 
-
+# 返回的str为字符串，res为字符串算式的正确与否，1为正确，-1为错误
 def strrandom():  # 生成随机算数
     num1 = random.randint(0, 50)
     num2 = random.randint(0, 50)
@@ -83,8 +83,8 @@ for i in range(0,trail_times):
     qesandans_appeartime.append((i+1)*600)
 
 appear_time = []  # 储存刺激出现的时间
-stimu_delaytime = [0,3,6,9,12,15,18,21]
-stimu_delaytime_list = [] #储存每一次随机产生的刺激延迟时间
+stimu_delaytime = [0,2,3,4,5,9,12]  # 储存刺激呈现时间的时间序列，与time_random2()配合
+stimu_delaytime_list = []  # 储存每一次随机产生的刺激延迟时间
 for time_i in range(1, trail_times+1):
     random_delaytime = stimu_delaytime[time_random2()]
     stimu_delaytime_list.append(random_delaytime)
@@ -94,7 +94,7 @@ myfont = pygame.font.SysFont('宋体', 150)
 myfont1 = pygame.font.SysFont('宋体', 30)
 answer = []  # 储存问题1回答
 result = []  # 储存问题1的正确答案
-surface = []
+surface = []  # 储存表面呈现的算式
 question = []  # feiqi问卷问题
 answer2 = [0, 0, 0, 0]  # feiqi储存问卷的回答
 question.append(myfont1.render("Do you see something else?", False, (200, 200, 10)))
@@ -123,7 +123,7 @@ for i in range(0, trail_times):
 # list = [2,62,122,182,242,302,362,422,500,560,620,680,740,800,860,1300]
 list = []# 储存背景出现的时间
 list.append(1)
-for i in range(1, 800):
+for i in range(1, bg_appearnum*trail_times):
     list.append(i * bg_appeartime)
 #num = 0
 count = 1
@@ -137,17 +137,17 @@ while 1:
     if count == list[-1]:
         fp = open("{}.txt".format(filename), 'w')  # 如果有这个文件就打开，如果没有这个文件就创建一个txt文件
         for i in range(0,len(list_time_res)):
-            fp.write("{}\t".format(stimu_delaytime_list[i]))
-            fp.write("{}\n".format(list_time_res[i]))
+            fp.write("{}\t".format(stimu_delaytime_list[i]))  # 储存该次刺激出现的时间，单位1/60s
+            fp.write("{}\n".format(list_time_res[i]))  # 储存本次问卷的答案
         fp.close()
         print("{}:{}".format("回答正确率", acc(answer, result)))
-        for __i in list_time_res:
-            print(__i)
+        # for __i in list_time_res:
+        #     print(__i)
 
         sys.exit()
     for event in pygame.event.get():  # 获取用户当前所做动作的事件列表
         if event.type == pygame.QUIT:
-            fp = open("{}.txt".format(filename), 'w')  # 如果有这个文件就打开，如果没有这个文件就创建一个名叫CSDN的txt文件
+            fp = open("{}.txt".format(filename), 'w')  # 如果有这个文件就打开，如果没有这个文件就创建一个 txt文件
             for i in range(0, len(list_time_res)):
                 fp.write("{}\t".format(stimu_delaytime_list[i]))
                 fp.write("{}\n".format(list_time_res[i]))
