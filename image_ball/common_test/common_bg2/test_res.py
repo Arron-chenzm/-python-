@@ -23,8 +23,8 @@ class test_res:
         return self.__thing
 
     def printres(self):
-        print("次数:{} 是否看到:{} 刺激物：{}".format(self.__times, self.get_see(), self.get_thing()))
+        print("次数:{} 是否看到:{} 刺激物:{}".format(self.__times, self.get_see(), self.get_thing()))
 
     def res2str(self):
-        str = "次数:{} 是否看到:{} 刺激物：{}".format(self.__times, self.get_see(), self.get_thing())
+        str = "次数:{} 是否看到:{} 刺激物:{}".format(self.__times, self.get_see(), self.get_thing())
         return str

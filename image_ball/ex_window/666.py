@@ -10,7 +10,5 @@ from PIL import ImageTk, Image
 import random
 
 
-pygame.init()
-infoObject = pygame.display.Info()
-size = width, height = infoObject.current_w,infoObject.current_h
-print(width)
+ciji_times = [0,0,0,0,0,0,0]
+result = [0,0,0,0,0,0,0]

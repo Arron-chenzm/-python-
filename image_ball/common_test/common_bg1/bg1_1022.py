@@ -9,12 +9,12 @@ from qesandans import qesandans
 from PIL import ImageTk, Image
 import random
 
-filename = "czm2"  # 结果文件名
+filename = "czm3_bg1"  # 结果文件名
 mode = 50  # 对比度选择
 bg_appeartime = 60  # 每一张背景图片呈现的时间,单位1000/60ms
 bg_appearnum = 10  # 每一个trail呈现的图片数目
 trail_bgtime = bg_appeartime * bg_appearnum  # 每一个trail背景图片呈现的总时间
-trail_times = 70  # 呈现trail次数
+trail_times = 71  # 呈现trail次数
 num = 0  # 储藏回答问题的总数目
 trail_num = []  # 存储每一个trail结束后，回答问题的总数目
 
@@ -85,15 +85,16 @@ def getfiles(Path):
     return files
 qesandans_appeartime = []#储存问卷呈现时间
 for i in range(0,trail_times):
-    qesandans_appeartime.append((i+1)*600)
+    qesandans_appeartime.append((i+1)*bg_appeartime*bg_appearnum)
 
 appear_time = []  # 储存刺激出现的时间
 stimu_delaytime = [0,2,3,4,5,9,12]  # 储存刺激呈现时间的时间序列，与time_random2()配合
-#stimu_delaytime = [0,0,0,0,0,0,0]
+#stimu_delaytime = [130,130,130,130,130,130,130]
 stimu_delaytime_list = []  # 储存每一次随机产生的刺激延迟时间
 for i in range(0,10):
     stimu_delaytime_list.extend(stimu_delaytime)
 random.shuffle(stimu_delaytime_list)
+stimu_delaytime_list.append(0)
 for time_i in range(1, trail_times+1):
     if stimu_delaytime_list[time_i-1]==0:
         continue
@@ -154,9 +155,10 @@ while 1:
     count = count + 1
     if count == list[-1]:
         fp = open("../result/{}.txt".format(filename), 'w',encoding="utf-8")  # 如果有这个文件就打开，如果没有这个文件就创建一个txt文件
-        for i in range(0,len(list_time_res)):
+        for i in range(0,len(list_time_res)-1):
             fp.write("{}\t".format(stimu_delaytime_list[i]))  # 储存该次刺激出现的时间，单位1/60s
             fp.write("{}\n".format(list_time_res[i]))  # 储存本次问卷的答案
+        fp.write("{}:{}".format("回答正确率", acc(answer, result)))
         fp.close()
         print("{}:{}".format("回答正确率", acc(answer, result)))
         # for __i in list_time_res:
@@ -167,9 +169,10 @@ while 1:
         if event.type == pygame.QUIT :
             fp = open("../result/{}.txt".format(filename), 'w',encoding='utf-8')  # 如果有这个文件就打开，如果没有这个文件就创建一个 txt文件
 
-            for i in range(0, len(list_time_res)):
+            for i in range(0, len(list_time_res)-1):
                 fp.write("{}\t".format(stimu_delaytime_list[i]))
                 fp.write("{}\n".format(list_time_res[i]))
+            fp.write("{}:{}".format("回答正确率", acc(answer, result)))
             fp.close()
             print(trail_num)
 
@@ -178,9 +181,10 @@ while 1:
             # 检测按键是否是a或者left
             if  event.key == K_ESCAPE:
                 fp = open("../result/{}.txt".format(filename), 'w', encoding='utf-8')  # 如果有这个文件就打开，如果没有这个文件就创建一个 txt文件
-                for i in range(0, len(list_time_res)):
+                for i in range(0, len(list_time_res)-1):
                     fp.write("{}\t".format(stimu_delaytime_list[i]))
                     fp.write("{}\n".format(list_time_res[i]))
+                fp.write("{}:{}".format("回答正确率", acc(answer, result)))
                 fp.close()
                 sys.exit()
             if res <= -2:
