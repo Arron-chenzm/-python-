@@ -88,8 +88,8 @@ for i in range(0,trail_times):
     qesandans_appeartime.append((i+1)*bg_appeartime*bg_appearnum)
 
 appear_time = []  # 储存刺激出现的时间
-stimu_delaytime = [0,2,3,4,5,9,12]  # 储存刺激呈现时间的时间序列，与time_random2()配合
-#stimu_delaytime = [0,0,0,0,0,0,0]
+#stimu_delaytime = [0,2,3,4,5,9,12]  # 储存刺激呈现时间的时间序列，与time_random2()配合
+stimu_delaytime = [59,59,59,59,59,59,59]
 stimu_delaytime_list = []  # 储存每一次随机产生的刺激延迟时间
 for i in range(0,10):
     stimu_delaytime_list.extend(stimu_delaytime)
@@ -117,8 +117,8 @@ for i in range(0, 600):
 # print(result)
 imagebox = []
 imagebox2 = []
-Path = "../database/database1/cat_{}".format(mode)
-Path2 = "../database/database1/butterfly_{}".format(mode)
+Path = "../database/database2/gsganrao_{}".format(mode)
+Path2 = "../database/database2/gsciji_{}".format(mode)
 files = getfiles(Path)
 files2 = getfiles(Path2)
 bg_num = 290  # 图片数目

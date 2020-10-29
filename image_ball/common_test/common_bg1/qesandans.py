@@ -59,8 +59,11 @@ class qesandans():
         window = self.window
         list_time_res = self.list_time_res
         surBtnNormal = pygame.image.load("../picture_resourse/btn_normal.png").convert_alpha()
+        surBtnNormal = pygame.transform.scale(surBtnNormal, (120, 42))
         surBtnMove = pygame.image.load("../picture_resourse/btn_move.png").convert_alpha()
+        surBtnMove = pygame.transform.scale(surBtnMove, (120, 42))
         surBtnDown = pygame.image.load("../picture_resourse/btn_down.png").convert_alpha()
+        surBtnDown = pygame.transform.scale(surBtnDown, (120, 42))
         btnFont = pygame.font.SysFont("lisu", 40)
         time_start1 = self.toc(self.t1)
 
