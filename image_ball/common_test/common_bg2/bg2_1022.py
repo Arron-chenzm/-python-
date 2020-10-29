@@ -9,8 +9,8 @@ from qesandans import qesandans
 from PIL import ImageTk, Image
 import random
 
-filename = "czm2"  # 结果文件名
-mode = 50  # 对比度选择
+filename = "czm2_bg2"  # 结果文件名
+mode = 50  # 对比度选择10 20 50 100
 bg_appeartime = 60  # 每一张背景图片呈现的时间,单位1000/60ms
 bg_appearnum = 10  # 每一个trail呈现的图片数目
 trail_bgtime = bg_appeartime * bg_appearnum  # 每一个trail背景图片呈现的总时间

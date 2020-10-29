@@ -82,7 +82,7 @@ for i in range(0,len(lines)-1):
                     result[j] = result[j] + 0.5
 
 for i in range(0,len(ciji_times)):
-    acc[i] = result[i]/ciji_times[i]
+    #acc[i] = result[i]/ciji_times[i]
     print(result[i])
 plt.plot(stimu_delaytime,acc)
 plt.show()
