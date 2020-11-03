@@ -121,24 +121,34 @@ Path = "../database/database3/noise_{}".format(mode)
 Path2 = "../database/database3/noiseciji_{}".format(mode)
 files = getfiles(Path)
 files2 = getfiles(Path2)
-bg_num = 290  # 图片数目
+bg_num = 100 # 图片数目
 stimu_num = trail_times # 刺激图片数目
 for i in range(0, bg_num):
-    picture = pygame.image.load(Path + '\\' + files[i])
+    picture = pygame.image.load(Path + '\\' + files[i]).convert()
     picture = pygame.transform.scale(picture, (width, height))
     imagebox.append(picture)
-for i in range(0, bg_num):
-    picture = pygame.image.load(Path + '\\' + files[i])
-    picture = pygame.transform.scale(picture, (width, height))
-    imagebox.append(picture)
-for i in range(0, 220):
-    picture = pygame.image.load(Path + '\\' + files[i])
-    picture = pygame.transform.scale(picture, (width, height))
-    imagebox.append(picture)
+    #print(i)
+imagebox.extend(imagebox)
+imagebox.extend(imagebox)
+imagebox.extend(imagebox)
+random.shuffle(imagebox)
+#print(len(imagebox))
+
+# for i in range(0, bg_num):
+#     picture = pygame.image.load(Path + '\\' + files[i]).convert()
+#     #picture = pygame.transform.scale(picture, (width, height))
+#     imagebox.append(picture)
+#     print(i)
+# for i in range(0, 220):
+#     picture = pygame.image.load(Path + '\\' + files[i]).convert()
+#     #picture = pygame.transform.scale(picture, (width, height))
+#     imagebox.append(picture)
+#     print(i)
 for i in range(0, trail_times):
-    picture = pygame.image.load(Path2 + '\\' + files2[i])
-    picture = pygame.transform.scale(picture, (width, height))
+    picture = pygame.image.load(Path2 + '\\' + files2[i]).convert()
+    #picture = pygame.transform.scale(picture, (width, height))
     imagebox2.append(picture)
+    print(i)
 # list = [2,62,122,182,242,302,362,422,500,560,620,680,740,800,860,1300]
 list = []# 储存背景出现的时间
 list.append(1)

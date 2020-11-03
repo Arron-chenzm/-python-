@@ -9,12 +9,12 @@ from qesandans import qesandans
 from PIL import ImageTk, Image
 import random
 
-filename = "czm2"  # 结果文件名
-mode = 100  # 对比度选择
+filename = "czm2_bg2"  # 结果文件名
+mode = 50  # 对比度选择10 20 50 100
 bg_appeartime = 60  # 每一张背景图片呈现的时间,单位1000/60ms
 bg_appearnum = 10  # 每一个trail呈现的图片数目
 trail_bgtime = bg_appeartime * bg_appearnum  # 每一个trail背景图片呈现的总时间
-trail_times = 70  # 呈现trail次数
+trail_times = 71  # 呈现trail次数+1
 num = 0  # 储藏回答问题的总数目
 trail_num = []  # 存储每一个trail结束后，回答问题的总数目
 
@@ -89,7 +89,7 @@ for i in range(0,trail_times):
 
 appear_time = []  # 储存刺激出现的时间
 stimu_delaytime = [0,2,3,4,5,9,12]  # 储存刺激呈现时间的时间序列，与time_random2()配合
-#stimu_delaytime = [0,0,0,0,0,0,0]
+#stimu_delaytime = [59,59,59,59,59,59,59]
 stimu_delaytime_list = []  # 储存每一次随机产生的刺激延迟时间
 for i in range(0,10):
     stimu_delaytime_list.extend(stimu_delaytime)
@@ -117,24 +117,30 @@ for i in range(0, 600):
 # print(result)
 imagebox = []
 imagebox2 = []
-Path = "../database/database3/noise_{}".format(mode)
-Path2 = "../database/database3/noiseciji_{}".format(mode)
+Path = "../database/database2/gsganrao_{}".format(mode)
+Path2 = "../database/database2/gsciji_{}".format(mode)
 files = getfiles(Path)
 files2 = getfiles(Path2)
-bg_num = 290  # 图片数目
+bg_num = 180  # 图片数目
 stimu_num = trail_times # 刺激图片数目
 for i in range(0, bg_num):
-    picture = pygame.image.load(Path + '\\' + files[i])
+    picture = pygame.image.load(Path + '\\' + files[i]).convert()
     picture = pygame.transform.scale(picture, (width, height))
     imagebox.append(picture)
-for i in range(0, bg_num):
-    picture = pygame.image.load(Path + '\\' + files[i])
-    picture = pygame.transform.scale(picture, (width, height))
-    imagebox.append(picture)
-for i in range(0, 220):
-    picture = pygame.image.load(Path + '\\' + files[i])
-    picture = pygame.transform.scale(picture, (width, height))
-    imagebox.append(picture)
+    print(i)
+imagebox.extend(imagebox)
+imagebox.extend(imagebox)
+imagebox.extend(imagebox)
+random.shuffle(imagebox)
+print(len(imagebox))
+# for i in range(0, bg_num):
+#     picture = pygame.image.load(Path + '\\' + files[i])
+#     picture = pygame.transform.scale(picture, (width, height))
+#     imagebox.append(picture)
+# for i in range(0, 220):
+#     picture = pygame.image.load(Path + '\\' + files[i])
+#     picture = pygame.transform.scale(picture, (width, height))
+#     imagebox.append(picture)
 for i in range(0, trail_times):
     picture = pygame.image.load(Path2 + '\\' + files2[i])
     picture = pygame.transform.scale(picture, (width, height))
