@@ -23,7 +23,7 @@ infoObject = pygame.display.Info()
 size = width, height = infoObject.current_w,infoObject.current_h  # 控制文本框的大小
 list_time_res = [0] * trail_times
 
-window = pygame.display.set_mode(size, FULLSCREEN|HWSURFACE)
+window = pygame.display.set_mode(size, FULLSCREEN|HWSURFACE|DOUBLEBUF)
 surBtnNormal = pygame.image.load("../picture_resourse/btn_normal.png").convert_alpha()
 surBtnMove = pygame.image.load("../picture_resourse/btn_move.png").convert_alpha()
 surBtnDown = pygame.image.load("../picture_resourse/btn_down.png").convert_alpha()
@@ -32,9 +32,9 @@ btnFont = pygame.font.SysFont("lisu", 40)
 delay_time = 0  # 问卷进行的时间,单位1000/60ms
 
 
-# 产生1-10的随机数，确定刺激在10张背景图中哪一张后出现
+# 产生1-9的随机数，确定刺激在9张背景图中哪一张后出现
 def time_random1():
-    num = random.randint(1, 10)
+    num = random.randint(1, 9)
     return num
 
 # 生成0-6的随机数，前后都是闭区间
@@ -124,7 +124,7 @@ files2 = getfiles(Path2)
 bg_num = 200  # 图片数目
 stimu_num = trail_times # 刺激图片数目
 for i in range(0, bg_num):
-    picture = pygame.image.load(Path + '\\' + files[i])
+    picture = pygame.image.load(Path + '\\' + files[i]).convert()
     picture = pygame.transform.scale(picture, (width, height))
     imagebox.append(picture)
 imagebox.extend(imagebox)
@@ -140,7 +140,7 @@ random.shuffle(imagebox)
 #     picture = pygame.transform.scale(picture, (width, height))
 #     imagebox.append(picture)
 for i in range(0, trail_times):
-    picture = pygame.image.load(Path2 + '\\' + files2[i])
+    picture = pygame.image.load(Path2 + '\\' + files2[i]).convert()
     picture = pygame.transform.scale(picture, (width, height))
     imagebox2.append(picture)
 # list = [2,62,122,182,242,302,362,422,500,560,620,680,740,800,860,1300]
