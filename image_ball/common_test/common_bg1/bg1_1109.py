@@ -9,7 +9,7 @@ from qesandans import qesandans
 from PIL import ImageTk, Image
 import random
 
-filename = "dt_bg1_100_time6"  # 结果文件名
+filename = "dt_test1"  # 结果文件名
 mode = 100  # 对比度选择
 
 #stimu_delaytime = [0,2,3,4,5,9,12]  # 储存刺激呈现时间的时间序列，与time_random2()配合1
@@ -17,12 +17,12 @@ mode = 100  # 对比度选择
 #stimu_delaytime = [0,3,6,9,12,15,20]#3
 #stimu_delaytime = [0,4,8,12,16,20,30]#4
 #stimu_delaytime = [0,5,10,15,20,25,40]#5
-stimu_delaytime = [130,130,130,130,130,130,130]#6
+stimu_delaytime = [0,2,4,6,8,10,12,14,16]#9个时间
 
 bg_appeartime = 60  # 每一张背景图片呈现的时间,单位1000/60ms
 bg_appearnum = 10  # 每一个trail呈现的图片数目
 trail_bgtime = bg_appeartime * bg_appearnum  # 每一个trail背景图片呈现的总时间
-trail_times = 71  # 呈现trail次数
+trail_times = 91  # 呈现trail次数
 num = 0  # 储藏回答问题的总数目
 trail_num = []  # 存储每一个trail结束后，回答问题的总数目
 
@@ -122,7 +122,7 @@ question = []  # feiqi问卷问题
 answer2 = [0, 0, 0, 0]  # feiqi储存问卷的回答
 question.append(myfont1.render("Do you see something else?", False, (200, 200, 10)))
 
-for i in range(0, 600):
+for i in range(0, 2000):
     str, res = strrandom()
     surface.append(myfont.render(str, False, (200, 200, 10)))
     result.append(res)
@@ -151,10 +151,12 @@ random.shuffle(imagebox)
 #     picture = pygame.image.load(Path + '\\' + files[i])
 #     picture = pygame.transform.scale(picture, (width, height))
 #     imagebox.append(picture)
-for i in range(0, trail_times):
+for i in range(0, 80):
     picture = pygame.image.load(Path2 + '\\' + files2[i]).convert()
     picture = pygame.transform.scale(picture, (width, height))
     imagebox2.append(picture)
+imagebox2.extend(imagebox2)
+random.shuffle(imagebox2)
 # list = [2,62,122,182,242,302,362,422,500,560,620,680,740,800,860,1300]
 list = []# 储存背景出现的时间
 list.append(1)

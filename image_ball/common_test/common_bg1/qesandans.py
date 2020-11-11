@@ -76,9 +76,9 @@ class qesandans():
         btn1 = Button(0+self.weight/3, 0+self.height/3, "看到", surBtnNormal, surBtnMove, surBtnDown, self.btnCallBack1, btnFont, (255, 0, 0))
         btn2 = Button(200+self.weight/3, 0+self.height/3, "未看到", surBtnNormal, surBtnMove, surBtnDown, self.btnCallBack2, btnFont, (255, 0, 0))
         btn3 = Button(0+self.weight/3, 100+self.height/3, "蝴蝶", surBtnNormal, surBtnMove, surBtnDown, self.btnCallBack3, btnFont, (255, 0, 0))
-        btn4 = Button(125+self.weight/3, 100+self.height/3, "青蛙", surBtnNormal, surBtnMove, surBtnDown, self.btnCallBack4, btnFont, (255, 0, 0))
-        btn5 = Button(250+self.weight/3, 100+self.height/3, "苹果", surBtnNormal, surBtnMove, surBtnDown, self.btnCallBack5, btnFont, (255, 0, 0))
-        btn6 = Button(375+self.weight/3, 100+self.height/3, "猴子", surBtnNormal, surBtnMove, surBtnDown, self.btnCallBack6, btnFont, (255, 0, 0))
+        btn4 = Button(125+self.weight/3, 100+self.height/3, "香蕉", surBtnNormal, surBtnMove, surBtnDown, self.btnCallBack4, btnFont, (255, 0, 0))
+        btn5 = Button(250+self.weight/3, 100+self.height/3, "狗", surBtnNormal, surBtnMove, surBtnDown, self.btnCallBack5, btnFont, (255, 0, 0))
+        btn6 = Button(375+self.weight/3, 100+self.height/3, "熊猫", surBtnNormal, surBtnMove, surBtnDown, self.btnCallBack6, btnFont, (255, 0, 0))
         btn7 = Button(100+self.weight/3, 200+self.height/3, "不确定", surBtnNormal, surBtnMove, surBtnDown, self.btnCallBack7, btnFont, (255, 0, 0))
 
         #print("2333333333")

@@ -51,10 +51,12 @@ def bg1_thing(str):
             break
     return res
 
+def getresult(time_list,path):
+    pass
 
 
 stimu_delaytime = [0,2,3,4,5,9,12]
-fp = open('../result/czm2_bg1.txt','r', encoding='utf-8')
+fp = open('../result/dt_bg1_100_time1.txt','r', encoding='utf-8')
 lines = fp.readlines()
 ciji_times = [0,0,0,0,0,0,0]
 result = [0,0,0,0,0,0,0]
