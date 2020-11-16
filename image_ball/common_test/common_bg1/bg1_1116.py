@@ -17,8 +17,8 @@ mode = 100  # 对比度选择 100 50 20 10
 # stimu_delaytime = [0,3,6,9,12,15,20]#3
 # stimu_delaytime = [0,4,8,12,16,20,30]#4
 # stimu_delaytime = [0,5,10,15,20,25,40]#5
-stimu_delaytime = [0, 2, 4, 6, 8, 10, 12, 14, 16]  # 9个时间
-#stimu_delaytime = [52,52,52,52,52,52,25,52,52]
+#stimu_delaytime = [0, 2, 4, 6, 8, 10, 12, 14, 16]  # 9个时间
+stimu_delaytime = [52,52,52,52,52,52,25,52,52]
 
 bg_appeartime = 60  # 每一张背景图片呈现的时间,单位1000/60ms
 bg_appearnum = 10  # 每一个trail呈现的图片数目
@@ -26,6 +26,8 @@ trail_bgtime = bg_appeartime * bg_appearnum  # 每一个trail背景图片呈现�
 trail_times = 91  # 呈现trail次数
 num = 0  # 储藏回答问题的总数目
 trail_num = []  # 存储每一个trail结束后，回答问题的总数目
+ciji_shape = 4
+tm_pra = 160 # 刺激图片透明度，0为透明，255为完全不透明
 
 pygame.init()
 infoObject = pygame.display.Info()
@@ -183,8 +185,8 @@ for i in range(0, trail_times): #pic_ciji = []
         ciji_path = Path5
         pic_ciji.append('熊猫')
     picture = pygame.image.load(ciji_path + '\\' + ciji_file.pop()).convert()
-
-    picture = pygame.transform.scale(picture, (int(width / 3), int(height / 3)))
+    picture = pygame.transform.scale(picture, (int(width / ciji_shape), int(height / ciji_shape)))
+    picture.set_alpha(tm_pra)  # 0透明 255不透明
     imagebox2.append(picture)
 pic_ciji.reverse()
 
@@ -288,13 +290,13 @@ while 1:
         elif count in appear_time:  # 存储刺激照片出现时间的数组
             pic_local = time_random4()
             if pic_local==1:
-                window.blit(imagebox2.pop(), (0, 0))  # 显示刺激照片 width, height
+                window.blit(imagebox2.pop(), (random.randint(0,int((ciji_shape-1) * width / ciji_shape)-10), 0))  # 显示刺激照片 width, height
             elif pic_local==2:
-                window.blit(imagebox2.pop(), (int(2*width/3)-10, 0))
+                window.blit(imagebox2.pop(), (random.randint(0,int((ciji_shape-1) * width / ciji_shape)-10), int((ciji_shape-1) * height / ciji_shape)-10))
             elif pic_local == 3:
-                window.blit(imagebox2.pop(), (0, int(2 * height / 3)-10))
+                window.blit(imagebox2.pop(), (0, random.randint(0,int((ciji_shape-1) * height / ciji_shape)-10)))
             elif pic_local==4:
-                window.blit(imagebox2.pop(), (int(2 * width / 3)-10, int(2 * height / 3)-10))
+                window.blit(imagebox2.pop(), (int((ciji_shape-1) * width / ciji_shape)-10,  random.randint(0,int((ciji_shape-1) * height / ciji_shape)-10)))
             res = -1
             pygame.display.update()
             # print(toc(t1))

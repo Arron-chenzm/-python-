@@ -9,17 +9,16 @@ from qesandans import qesandans
 from PIL import ImageTk, Image
 import random
 
-filename = "czm2_bg2"  # 结果文件名
-mode = 50  # 对比度选择10 20 50 100
-
-#stimu_delaytime = [0,2,3,4,5,9,12]  # 储存刺激呈现时间的时间序列，与time_random2()配合
-#stimu_delaytime = [59,59,59,59,59,59,59]
-stimu_delaytime = [0, 2, 4, 6, 8, 10, 12, 14, 16]
+filename = "dt_bg3_001_1"  # 结果文件名
+mode = 100  # 对比度选择
+mode2 = 0.01 # 100 0.01
+stimu_delaytime = [0, 2, 4, 6, 8, 10, 12, 14, 16]  # 9个时间
+#stimu_delaytime = [52,52,52,52,52,52,25,52,52] # 储存刺激呈现时间的时间序列，与time_random2()配合
 
 bg_appeartime = 60  # 每一张背景图片呈现的时间,单位1000/60ms
 bg_appearnum = 10  # 每一个trail呈现的图片数目
 trail_bgtime = bg_appeartime * bg_appearnum  # 每一个trail背景图片呈现的总时间
-trail_times = 91 # 呈现trail次数+1
+trail_times = 91  # 呈现trail次数
 num = 0  # 储藏回答问题的总数目
 trail_num = []  # 存储每一个trail结束后，回答问题的总数目
 
@@ -28,7 +27,7 @@ infoObject = pygame.display.Info()
 size = width, height = infoObject.current_w,infoObject.current_h  # 控制文本框的大小
 list_time_res = [0] * trail_times
 
-window = pygame.display.set_mode(size, FULLSCREEN|HWSURFACE)
+window = pygame.display.set_mode(size, FULLSCREEN|HWSURFACE|DOUBLEBUF)
 surBtnNormal = pygame.image.load("../picture_resourse/btn_normal.png").convert_alpha()
 surBtnMove = pygame.image.load("../picture_resourse/btn_move.png").convert_alpha()
 surBtnDown = pygame.image.load("../picture_resourse/btn_down.png").convert_alpha()
@@ -37,9 +36,9 @@ btnFont = pygame.font.SysFont("lisu", 40)
 delay_time = 0  # 问卷进行的时间,单位1000/60ms
 
 
-# 产生1-10的随机数，确定刺激在10张背景图中哪一张后出现
+# 产生1-9的随机数，确定刺激在9张背景图中哪一张后出现
 def time_random1():
-    num = random.randint(1, 10)
+    num = random.randint(1, 9)
     return num
 
 # 生成0-6的随机数，前后都是闭区间
@@ -47,6 +46,10 @@ def time_random2():
     num = random.randint(0, 6)
     return num
 
+# 生成1-4的随机数，前后都是闭区间
+def time_random4():
+    num = random.randint(1, 4)
+    return num
 
 def toc(t1):
     t = time.time()
@@ -112,37 +115,70 @@ result = []  # 储存问题1的正确答案
 surface = []  # 储存表面呈现的算式
 question = []  # feiqi问卷问题
 answer2 = [0, 0, 0, 0]  # feiqi储存问卷的回答
+pic_ciji = [] # 储存呈现的刺激图片列表
 question.append(myfont1.render("Do you see something else?", False, (200, 200, 10)))
 
-for i in range(0, 2000):
+for i in range(0, 3000):
     str, res = strrandom()
     surface.append(myfont.render(str, False, (200, 200, 10)))
     result.append(res)
 # print(result)
 imagebox = []
 imagebox2 = []
-Path = "../database/database2/gsganrao_{}".format(mode)
-Path2 = "../database/database2/gsciji_{}".format(mode)
+Path = "../database/database3/noise_{}".format(mode)
+#Path2 = "../database/database3/noiseciji_{}".format(0.02)
+Path2 = "../database/database3/butterfly_gray_{}".format(mode2)
+Path3 = "../database/database3/banana_gray_{}".format(mode2)
+Path4 = "../database/database3/dog_gray_{}".format(mode2)
+Path5 = "../database/database3/panda_gray_{}".format(mode2)
 files = getfiles(Path)
 files2 = getfiles(Path2)
-bg_num = 290  # 图片数目
+files3 = getfiles(Path3)
+files4 = getfiles(Path4)
+files5 = getfiles(Path5)
+bg_num = 100 # 图片数目
 stimu_num = trail_times # 刺激图片数目
 for i in range(0, bg_num):
-    picture = pygame.image.load(Path + '\\' + files[i])
+    picture = pygame.image.load(Path + '\\' + files[i]).convert()
     picture = pygame.transform.scale(picture, (width, height))
     imagebox.append(picture)
-for i in range(0, bg_num):
-    picture = pygame.image.load(Path + '\\' + files[i])
-    picture = pygame.transform.scale(picture, (width, height))
-    imagebox.append(picture)
-for i in range(0, 220):
-    picture = pygame.image.load(Path + '\\' + files[i])
-    picture = pygame.transform.scale(picture, (width, height))
-    imagebox.append(picture)
-for i in range(0, trail_times):
-    picture = pygame.image.load(Path2 + '\\' + files2[i])
+    print(i)
+imagebox.extend(imagebox)
+imagebox.extend(imagebox)
+imagebox.extend(imagebox)
+imagebox.extend(imagebox)
+random.shuffle(imagebox)
+
+for i in range(0, trail_times): #pic_ciji = []
+    ciji_random = time_random4()
+    ciji_path = ''
+    ciji_file = []
+    if ciji_random == 1:
+        ciji_path = Path2
+        ciji_file = files2
+        pic_ciji.append('蝴蝶')
+    elif ciji_random == 2:
+        ciji_path = Path3
+        ciji_file = files3
+        pic_ciji.append('香蕉')
+    elif ciji_random == 3:
+        ciji_file = files4
+        ciji_path = Path4
+        pic_ciji.append('狗')
+    elif ciji_random == 4:
+        ciji_file = files5
+        ciji_path = Path5
+        pic_ciji.append('熊猫')
+    picture = pygame.image.load(ciji_path + '\\' + ciji_file.pop()).convert()
     picture = pygame.transform.scale(picture, (width, height))
     imagebox2.append(picture)
+pic_ciji.reverse()
+
+# for i in range(0, trail_times):
+#     picture = pygame.image.load(Path2 + '\\' + files2[i]).convert()
+#     picture = pygame.transform.scale(picture, (width, height))
+#     imagebox2.append(picture)
+    #print(i)
 # list = [2,62,122,182,242,302,362,422,500,560,620,680,740,800,860,1300]
 list = []# 储存背景出现的时间
 list.append(1)
@@ -161,7 +197,8 @@ while 1:
         fp = open("../result/{}.txt".format(filename), 'w',encoding="utf-8")  # 如果有这个文件就打开，如果没有这个文件就创建一个txt文件
         for i in range(0,len(list_time_res)-1):
             fp.write("{}\t".format(stimu_delaytime_list[i]))  # 储存该次刺激出现的时间，单位1/60s
-            fp.write("{}\n".format(list_time_res[i]))  # 储存本次问卷的答案
+            fp.write("{} ".format(list_time_res[i]))  # 储存本次问卷的答案
+            fp.write("{}\n".format(pic_ciji[i]))  # 储存本次出现的刺激种类
         fp.write("{}:{}".format("回答正确率", acc(answer, result)))
         fp.close()
         print("{}:{}".format("回答正确率", acc(answer, result)))
@@ -175,7 +212,8 @@ while 1:
 
             for i in range(0, len(list_time_res)-1):
                 fp.write("{}\t".format(stimu_delaytime_list[i]))
-                fp.write("{}\n".format(list_time_res[i]))
+                fp.write("{} ".format(list_time_res[i]))
+                fp.write("{}\n".format(pic_ciji[i]))  # 储存本次出现的刺激种类
             fp.write("{}:{}".format("回答正确率", acc(answer, result)))
             fp.close()
             print(trail_num)
@@ -187,7 +225,8 @@ while 1:
                 fp = open("../result/{}.txt".format(filename), 'w', encoding='utf-8')  # 如果有这个文件就打开，如果没有这个文件就创建一个 txt文件
                 for i in range(0, len(list_time_res)-1):
                     fp.write("{}\t".format(stimu_delaytime_list[i]))
-                    fp.write("{}\n".format(list_time_res[i]))
+                    fp.write("{} ".format(list_time_res[i]))
+                    fp.write("{}\n".format(pic_ciji[i]))  # 储存本次出现的刺激种类
                 fp.write("{}:{}".format("回答正确率", acc(answer, result)))
                 fp.close()
                 sys.exit()

@@ -9,17 +9,16 @@ from qesandans import qesandans
 from PIL import ImageTk, Image
 import random
 
-filename = "czm2_bg2"  # 结果文件名
-mode = 50  # 对比度选择10 20 50 100
+filename = "czm2"  # 结果文件名
+mode = 100  # 对比度选择
 
-#stimu_delaytime = [0,2,3,4,5,9,12]  # 储存刺激呈现时间的时间序列，与time_random2()配合
-#stimu_delaytime = [59,59,59,59,59,59,59]
-stimu_delaytime = [0, 2, 4, 6, 8, 10, 12, 14, 16]
+stimu_delaytime = [0, 2, 4, 6, 8, 10, 12, 14, 16]  # 9个时间
+#stimu_delaytime = [52,52,52,52,52,52,25,52,52] # 储存刺激呈现时间的时间序列，与time_random2()配合
 
 bg_appeartime = 60  # 每一张背景图片呈现的时间,单位1000/60ms
 bg_appearnum = 10  # 每一个trail呈现的图片数目
 trail_bgtime = bg_appeartime * bg_appearnum  # 每一个trail背景图片呈现的总时间
-trail_times = 91 # 呈现trail次数+1
+trail_times = 91  # 呈现trail次数
 num = 0  # 储藏回答问题的总数目
 trail_num = []  # 存储每一个trail结束后，回答问题的总数目
 
@@ -28,7 +27,7 @@ infoObject = pygame.display.Info()
 size = width, height = infoObject.current_w,infoObject.current_h  # 控制文本框的大小
 list_time_res = [0] * trail_times
 
-window = pygame.display.set_mode(size, FULLSCREEN|HWSURFACE)
+window = pygame.display.set_mode(size, FULLSCREEN|HWSURFACE|DOUBLEBUF)
 surBtnNormal = pygame.image.load("../picture_resourse/btn_normal.png").convert_alpha()
 surBtnMove = pygame.image.load("../picture_resourse/btn_move.png").convert_alpha()
 surBtnDown = pygame.image.load("../picture_resourse/btn_down.png").convert_alpha()
@@ -37,9 +36,9 @@ btnFont = pygame.font.SysFont("lisu", 40)
 delay_time = 0  # 问卷进行的时间,单位1000/60ms
 
 
-# 产生1-10的随机数，确定刺激在10张背景图中哪一张后出现
+# 产生1-9的随机数，确定刺激在9张背景图中哪一张后出现
 def time_random1():
-    num = random.randint(1, 10)
+    num = random.randint(1, 9)
     return num
 
 # 生成0-6的随机数，前后都是闭区间
@@ -114,35 +113,47 @@ question = []  # feiqi问卷问题
 answer2 = [0, 0, 0, 0]  # feiqi储存问卷的回答
 question.append(myfont1.render("Do you see something else?", False, (200, 200, 10)))
 
-for i in range(0, 2000):
+for i in range(0, 3000):
     str, res = strrandom()
     surface.append(myfont.render(str, False, (200, 200, 10)))
     result.append(res)
 # print(result)
 imagebox = []
 imagebox2 = []
-Path = "../database/database2/gsganrao_{}".format(mode)
-Path2 = "../database/database2/gsciji_{}".format(mode)
+Path = "../database/database3/noise_{}".format(mode)
+#Path2 = "../database/database3/noiseciji_{}".format(0.02)
+Path2 = "../database/database3/butterfly_gray_100"
 files = getfiles(Path)
 files2 = getfiles(Path2)
-bg_num = 290  # 图片数目
+bg_num = 100 # 图片数目
 stimu_num = trail_times # 刺激图片数目
 for i in range(0, bg_num):
-    picture = pygame.image.load(Path + '\\' + files[i])
+    picture = pygame.image.load(Path + '\\' + files[i]).convert()
     picture = pygame.transform.scale(picture, (width, height))
     imagebox.append(picture)
-for i in range(0, bg_num):
-    picture = pygame.image.load(Path + '\\' + files[i])
-    picture = pygame.transform.scale(picture, (width, height))
-    imagebox.append(picture)
-for i in range(0, 220):
-    picture = pygame.image.load(Path + '\\' + files[i])
-    picture = pygame.transform.scale(picture, (width, height))
-    imagebox.append(picture)
+    print(i)
+imagebox.extend(imagebox)
+imagebox.extend(imagebox)
+imagebox.extend(imagebox)
+imagebox.extend(imagebox)
+random.shuffle(imagebox)
+#print(len(imagebox))
+
+# for i in range(0, bg_num):
+#     picture = pygame.image.load(Path + '\\' + files[i]).convert()
+#     #picture = pygame.transform.scale(picture, (width, height))
+#     imagebox.append(picture)
+#     print(i)
+# for i in range(0, 220):
+#     picture = pygame.image.load(Path + '\\' + files[i]).convert()
+#     #picture = pygame.transform.scale(picture, (width, height))
+#     imagebox.append(picture)
+#     print(i)
 for i in range(0, trail_times):
-    picture = pygame.image.load(Path2 + '\\' + files2[i])
+    picture = pygame.image.load(Path2 + '\\' + files2[i]).convert()
     picture = pygame.transform.scale(picture, (width, height))
     imagebox2.append(picture)
+    #print(i)
 # list = [2,62,122,182,242,302,362,422,500,560,620,680,740,800,860,1300]
 list = []# 储存背景出现的时间
 list.append(1)
