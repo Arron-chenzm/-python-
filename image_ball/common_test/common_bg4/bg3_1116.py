@@ -12,8 +12,8 @@ import random
 filename = "dt_bg3_001_1"  # 结果文件名
 mode = 100  # 对比度选择
 mode2 = 100 # 100 0.01
-#stimu_delaytime = [0, 2, 4, 6, 8, 10, 12, 14, 16]  # 9个时间
-stimu_delaytime = [52,52,52,52,52,52,25,52,52] # 储存刺激呈现时间的时间序列，与time_random2()配合
+stimu_delaytime = [0, 2, 4, 6, 8, 10, 12, 14, 16]  # 9个时间
+#stimu_delaytime = [52,52,52,52,52,52,25,52,52] # 储存刺激呈现时间的时间序列，与time_random2()配合
 
 bg_appeartime = 60  # 每一张背景图片呈现的时间,单位1000/60ms
 bg_appearnum = 10  # 每一个trail呈现的图片数目
@@ -22,7 +22,7 @@ trail_times = 91  # 呈现trail次数
 num = 0  # 储藏回答问题的总数目
 trail_num = []  # 存储每一个trail结束后，回答问题的总数目
 ciji_shape = 4 # 刺激图片大小
-tm_pra = 255 # 刺激图片透明度，0为透明，255为完全不透明
+tm_pra = 240 # 刺激图片透明度，0为透明，255为完全不透明
 
 pygame.init()
 infoObject = pygame.display.Info()
@@ -37,6 +37,8 @@ surBtnDown = pygame.image.load("../picture_resourse/btn_down.png").convert_alpha
 btnFont = pygame.font.SysFont("lisu", 40)
 delay_time = 0  # 问卷进行的时间,单位1000/60ms
 
+while(os.path.exists("../result/{}.txt".format(filename))):
+    filename = filename+"_2"
 
 # 产生1-9的随机数，确定刺激在9张背景图中哪一张后出现
 def time_random1():

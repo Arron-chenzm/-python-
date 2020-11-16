@@ -43,6 +43,8 @@ btnFont = pygame.font.SysFont("lisu", 40)
 delay_time = 0  # 问卷进行的时间,单位1000/60ms
 
 
+while(os.path.exists("../result/{}.txt".format(filename))):
+    filename = filename+"_2"
 # 产生1-9的随机数，确定刺激在9张背景图中哪一张后出现
 def time_random1():
     num = random.randint(1, 9)

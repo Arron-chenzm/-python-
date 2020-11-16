@@ -53,12 +53,12 @@ def bg1_thing(str):
 
 
 
-stimu_delaytime = [0,2,3,4,5,9,12]
-fp = open('../result/czm2_bg2.txt','r', encoding='utf-8')
+stimu_delaytime = [0, 2, 4, 6, 8, 10, 12, 14, 16]
+fp = open('../result/dt_bg3_100_1.txt','r', encoding='utf-8')
 lines = fp.readlines()
-ciji_times = [0,0,0,0,0,0,0]
-result = [0,0,0,0,0,0,0]
-acc = [0,0,0,0,0,0,0]
+ciji_times = [0,0,0,0,0,0,0,0,0]
+result = [0,0,0,0,0,0,0,0,0]
+acc = [0,0,0,0,0,0,0,0,0]
 for i in range(0,len(lines)-1):
     if len(lines[i])<10:
         continue
@@ -73,7 +73,7 @@ for i in range(0,len(lines)-1):
             ciji_times[0] = ciji_times[0] + 1
             if res == "未看到不同的白噪声":
                 result[0] = result[0] + 1
-        for j in range(1, 7):
+        for j in range(1, 9):
             if time == stimu_delaytime[j]:
                 ciji_times[j] = ciji_times[j] + 1
                 if res == "看到不同的白噪声" and thing == "None" :

@@ -45,7 +45,7 @@ def bg1_thing(str):
             flag = flag+1
             continue
         elif str[i] == ":" and flag == 2:
-            while (i<length-2):
+            while (i<length-2 and str[i+1]!=' '):
                 i = i + 1
                 res = res + str[i]
             break
@@ -79,8 +79,9 @@ def getresult(time_list,path):
         thing = bg1_thing(lines[i])
         ciji = get_ciji(lines[i])
         # print(time)
-        # print(res)
-        # print(thing)
+        print(res)
+        print(thing)
+        print(ciji)
         if time == stimu_delaytime[0]:
             ciji_times[0] = ciji_times[0] + 1
             if res == "未看到":
@@ -99,7 +100,7 @@ def getresult(time_list,path):
 
 stimu_delaytime1 = [0,2,4,6,8,10,12,14,16]
 
-path1 = '../result/dt_test1.txt'
+path1 = '../result/dt_bg3_100_1.txt'
 
 (acc1,result1,ciji_times1) = getresult(stimu_delaytime1,path1)
 
