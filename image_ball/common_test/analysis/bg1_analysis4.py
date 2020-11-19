@@ -79,9 +79,9 @@ def getresult(time_list,path):
         thing = bg1_thing(lines[i])
         ciji = get_ciji(lines[i])
         # print(time)
-        print(res)
-        print(thing)
-        print(ciji)
+        #print(res)
+        #print(thing)
+        #print(ciji)
         if time == stimu_delaytime[0]:
             ciji_times[0] = ciji_times[0] + 1
             if res == "未看到":
@@ -89,10 +89,12 @@ def getresult(time_list,path):
         for j in range(1, 9):
             if time == stimu_delaytime[j]:
                 ciji_times[j] = ciji_times[j] + 1
-                if res == "看到" and thing == ciji:
+                if res == "看到":
                     result[j] = result[j] + 1
-                elif res == "看到" and thing == "不确定":
-                    result[j] = result[j] + 0.5
+                # if res == "看到" and thing == ciji:
+                #     result[j] = result[j] + 1
+                # elif res == "看到" and thing == "不确定":
+                #     result[j] = result[j] + 0.5
     for i in range(0, len(result)):
         acc[i] = result[i] / ciji_times[i]
     return acc,result,ciji_times
@@ -100,12 +102,15 @@ def getresult(time_list,path):
 
 stimu_delaytime1 = [0,2,4,6,8,10,12,14,16]
 
-path1 = '../result/dt_bg3_100_1.txt'
+path1 = '../result/lwj/lwj_bg3_100_1.txt'
 
 (acc1,result1,ciji_times1) = getresult(stimu_delaytime1,path1)
 
 plt.figure(1)
-plt.plot(stimu_delaytime1,acc1)
+plt.plot(stimu_delaytime1,acc1,marker = 'o')
+for a,b in zip(stimu_delaytime1,acc1):
+    plt.text(a,b,(a,b),ha='center',va='bottom')
+plt.legend
 plt.show()
 
 

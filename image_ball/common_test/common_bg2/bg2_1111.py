@@ -9,8 +9,8 @@ from qesandans import qesandans
 from PIL import ImageTk, Image
 import random
 
-filename = "dt_bg2_100_1"  # 结果文件名
-mode = 100 # 对比度选择10 20 50 100
+filename = "lwj_bg2_10_1"  # 结果文件名
+mode = 10 # 对比度选择10 20 50 100
 
 stimu_delaytime = [0, 2, 4, 6, 8, 10, 12, 14, 16]  # 9个时间
 #stimu_delaytime = [52,52,52,52,52,52,25,52,52]
@@ -117,7 +117,7 @@ question.append(myfont1.render("Do you see something else?", False, (200, 200, 1
 
 for i in range(0, 3000):
     str, res = strrandom()
-    surface.append(myfont.render(str, False, (200, 200, 10)))
+    surface.append(myfont.render(str, False, (200, 0, 10)))
     result.append(res)
 # print(result)
 imagebox = []

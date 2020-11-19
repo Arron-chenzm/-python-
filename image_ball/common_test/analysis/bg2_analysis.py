@@ -54,7 +54,7 @@ def bg1_thing(str):
 
 
 stimu_delaytime = [0, 2, 4, 6, 8, 10, 12, 14, 16]
-fp = open('../result/dt_bg2_100_1.txt','r', encoding='utf-8')
+fp = open('../result/lwj/lwj_bg2_10_1.txt','r', encoding='utf-8')
 lines = fp.readlines()
 ciji_times = [0,0,0,0,0,0,0,0,0]
 result = [0,0,0,0,0,0,0,0,0]
@@ -84,5 +84,8 @@ for i in range(0,len(lines)-1):
 for i in range(0,len(ciji_times)):
     acc[i] = result[i]/ciji_times[i]
     print(result[i])
-plt.plot(stimu_delaytime,acc)
+plt.plot(stimu_delaytime,acc,marker = 'o')
+for a,b in zip(stimu_delaytime,acc):
+    plt.text(a,b,(a,b),ha='center',va='bottom')
+plt.legend
 plt.show()

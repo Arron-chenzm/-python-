@@ -8,21 +8,25 @@ from test_res import test_res
 from qesandans import qesandans
 from PIL import ImageTk, Image
 import random
+trail_times = 91
+ciji_shape = 4
+width = 1920
+height = 1080
+ciji_wzx = []
+ciji_wzy = []
+for i in range(0,trail_times):
+    pic_local = random.randint(1,4)
+    if pic_local == 1:
+        ciji_wzx.append(random.randint(0,int((ciji_shape-1) * width / ciji_shape)-10))
+        ciji_wzy.append(0)
+    elif pic_local == 2:
+        ciji_wzx.append(random.randint(0,int((ciji_shape-1) * width / ciji_shape)-10))
+        ciji_wzy.append(int((ciji_shape-1) * height / ciji_shape)-10)
+    elif pic_local == 3:
+        ciji_wzx.append(0)
+        ciji_wzy.append(random.randint(0,int((ciji_shape-1) * height / ciji_shape)-10))
+    elif pic_local == 4:
+        ciji_wzx.append(int((ciji_shape-1) * width / ciji_shape)-10)
+        ciji_wzy.append( random.randint(0,int((ciji_shape-1) * height / ciji_shape)-10))
 
 
-def get_ciji(str):
-    ciji = ''
-    length = len(str)
-    for i in range(length-2,0,-1):
-        if str[i]!= ' ':
-            ciji= str[i]+ciji
-        else:
-            break
-    return ciji
-
-path ='D:\\Users\\chen\\Desktop\\new\\codefile\\image_ball\\common_test\\result\\dt_test1.txt'
-
-fp = open(path, 'r', encoding='utf-8')
-lines = fp.readlines()
-for i in range(0,6):
-    print(get_ciji(lines[i]))
